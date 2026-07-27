@@ -9,6 +9,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1553967216220019');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+
 <style>
   :root{
     --bg:#FAFAF8;
@@ -135,10 +155,9 @@
 
   /* ================= HERO ================= */
   .hero{
-    min-height:92vh;
     display:flex;
     align-items:center;
-    padding:140px 0 80px;
+    padding:110px 0 60px;
   }
   .hero .container{
     padding-left:24px;
@@ -193,51 +212,65 @@
   .cycle-arrow{color:var(--accent-blue);font-weight:600;margin:0 6px;}
   .cycle-result{color:var(--accent-blue);}
 
-  /* ---- hero visual: illustrated mockup + floating stat cards ---- */
+  /* ---- hero visual: large illustrated panel + floating stat cards ---- */
   .hero-visual{
     position:relative;
     width:100%;
-    max-width:400px;
-    margin:0 auto;
   }
-  .hero-mockup{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:14px;
+  .hero-visual-panel{
+    position:relative;
+    background-image:radial-gradient(rgba(59,111,239,0.18) 1.5px, transparent 1.5px);
+    background-size:20px 20px;
+    background-color:var(--accent-blue-bg);
+    border-radius:24px;
+    padding:56px 20px;
+    min-height:380px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     overflow:hidden;
   }
-  .hero-mockup-bar{
+  @media(min-width:640px){
+    .hero-visual-panel{min-height:460px;padding:64px 32px;}
+  }
+  .hero-visual-tag{
+    position:absolute;
+    top:20px;
+    left:20px;
+    background:var(--surface);
+    border-radius:20px;
+    padding:7px 14px;
+    font-size:12px;
+    font-weight:600;
+    color:var(--text);
     display:flex;
     align-items:center;
     gap:6px;
-    padding:14px 16px;
-    border-bottom:1px solid var(--border);
+    z-index:2;
   }
-  .hero-mockup-dot{width:8px;height:8px;border-radius:50%;background:var(--border);}
-  .hero-mockup-title{margin-left:8px;font-size:13px;color:var(--muted);font-weight:500;}
-  .hero-mockup-body{
-    padding:28px 20px 32px;
+  .hero-visual-tag i{color:var(--accent-blue);font-size:14px;}
+
+  .hero-auto-grid{
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    width:100%;
+    max-width:340px;
+  }
+  .hero-auto-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:14px;
     display:flex;
     flex-direction:column;
-    align-items:center;
-    gap:12px;
   }
-  .hero-mockup-row{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:var(--bg);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:12px 16px;
-    width:100%;
-    font-size:14px;
-    font-weight:500;
-  }
-  .hero-mockup-row i{font-size:17px;color:var(--muted);flex-shrink:0;}
-  .hero-mockup-arrow{color:var(--accent-blue);font-size:16px;font-weight:600;}
-  .hero-mockup-result{border-color:var(--accent-blue);}
-  .hero-mockup-result i{color:var(--accent-blue);}
+  .hero-auto-card .icon-badge{width:34px;height:34px;border-radius:8px;margin-bottom:8px;}
+  .hero-auto-card .icon-badge i{font-size:15px;}
+  .hero-auto-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;}
+  .hero-auto-desc{font-size:11.5px;color:var(--muted);line-height:1.4;}
 
   .hero-stat-card{
     position:absolute;
@@ -247,11 +280,13 @@
     padding:14px 18px;
     z-index:2;
   }
-  .hero-stat-card--top{top:-18px;right:-10px;}
-  .hero-stat-card--bottom{bottom:-18px;left:-10px;}
+  .hero-stat-card--top{top:-16px;right:-8px;}
+  .hero-stat-card--bottom{bottom:-16px;left:-8px;}
+  .hero-stat-card--right{bottom:-16px;right:-8px;}
   @media(min-width:640px){
-    .hero-stat-card--top{top:-24px;right:-20px;}
-    .hero-stat-card--bottom{bottom:-24px;left:-20px;}
+    .hero-stat-card--top{top:-20px;right:-20px;}
+    .hero-stat-card--bottom{bottom:-20px;left:-20px;}
+    .hero-stat-card--right{bottom:-20px;right:-20px;}
   }
   .hero-stat-value{font-size:1.35rem;font-weight:600;color:var(--text);letter-spacing:-0.02em;}
   .hero-stat-label{font-size:12px;color:var(--muted);margin-top:2px;}
@@ -642,22 +677,29 @@
     </div>
 
     <div class="hero-visual">
-      <div class="hero-mockup">
-        <div class="hero-mockup-bar">
-          <span class="hero-mockup-dot"></span>
-          <span class="hero-mockup-dot"></span>
-          <span class="hero-mockup-dot"></span>
-          <span class="hero-mockup-title">Metryx Automation</span>
-        </div>
-        <div class="hero-mockup-body">
-          <div class="hero-mockup-row">
-            <i class="ti ti-bell"></i>
-            <span>New lead received</span>
+      <div class="hero-visual-panel">
+        <span class="hero-visual-tag"><i class="ti ti-bolt"></i> What we automate</span>
+
+        <div class="hero-auto-grid">
+          <div class="hero-auto-card">
+            <div class="icon-badge blue"><i class="ti ti-message-2"></i></div>
+            <div class="hero-auto-title">Lead follow-ups</div>
+            <div class="hero-auto-desc">Cold quotes get an automatic nudge before they go quiet.</div>
           </div>
-          <div class="hero-mockup-arrow">&darr;</div>
-          <div class="hero-mockup-row hero-mockup-result">
-            <i class="ti ti-circle-check"></i>
-            <span>Quote sent via WhatsApp</span>
+          <div class="hero-auto-card">
+            <div class="icon-badge green"><i class="ti ti-user-plus"></i></div>
+            <div class="hero-auto-title">Client onboarding</div>
+            <div class="hero-auto-desc">Contract, invoice & welcome email sent the moment they say yes.</div>
+          </div>
+          <div class="hero-auto-card">
+            <div class="icon-badge orange"><i class="ti ti-calendar-check"></i></div>
+            <div class="hero-auto-title">Appointment reminders</div>
+            <div class="hero-auto-desc">24hr + 1hr reminders sent automatically. No-shows drop.</div>
+          </div>
+          <div class="hero-auto-card">
+            <div class="icon-badge purple"><i class="ti ti-file-analytics"></i></div>
+            <div class="hero-auto-title">Reporting &amp; admin</div>
+            <div class="hero-auto-desc">A daily summary lands in your inbox. Zero manual data entry.</div>
           </div>
         </div>
       </div>
@@ -669,6 +711,10 @@
       <div class="hero-stat-card hero-stat-card--bottom">
         <div class="hero-stat-value">24/7</div>
         <div class="hero-stat-label">Never misses a lead</div>
+      </div>
+      <div class="hero-stat-card hero-stat-card--right">
+        <div class="hero-stat-value">100%</div>
+        <div class="hero-stat-label">Custom built</div>
       </div>
     </div>
   </div>
