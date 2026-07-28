@@ -37,7 +37,7 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
     --surface:#FFFFFF;
     --border:#E7E5DE;
 
-    --primary:#14130E;
+    --primary:#e8792a;
     --primary-hover:#2E2D27;
     --primary-ink:#FFFFFF;
 
@@ -272,6 +272,10 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
   .hero-auto-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;}
   .hero-auto-desc{font-size:11.5px;color:var(--muted);line-height:1.4;}
 
+  @keyframes floatCard{
+    0%, 100% { transform:translateY(0); }
+    50% { transform:translateY(-10px); }
+  }
   .hero-stat-card{
     position:absolute;
     background:var(--surface);
@@ -279,14 +283,15 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
     border-radius:10px;
     padding:14px 18px;
     z-index:2;
+    animation:floatCard 4.5s ease-in-out infinite;
   }
-  .hero-stat-card--top{top:-16px;right:-8px;}
-  .hero-stat-card--bottom{bottom:-16px;left:-8px;}
-  .hero-stat-card--right{bottom:-16px;right:-8px;}
+  .hero-stat-card--top{top:-18px;right:8%;animation-duration:4.8s;animation-delay:0s;}
+  .hero-stat-card--bottom{bottom:-24px;left:2%;animation-duration:5.6s;animation-delay:.7s;}
+  .hero-stat-card--right{bottom:-14px;right:4%;animation-duration:5.1s;animation-delay:1.4s;}
   @media(min-width:640px){
-    .hero-stat-card--top{top:-20px;right:-20px;}
-    .hero-stat-card--bottom{bottom:-20px;left:-20px;}
-    .hero-stat-card--right{bottom:-20px;right:-20px;}
+    .hero-stat-card--top{top:-26px;right:10%;}
+    .hero-stat-card--bottom{bottom:-34px;left:2%;}
+    .hero-stat-card--right{bottom:-18px;right:6%;}
   }
   .hero-stat-value{font-size:1.35rem;font-weight:600;color:var(--text);letter-spacing:-0.02em;}
   .hero-stat-label{font-size:12px;color:var(--muted);margin-top:2px;}
@@ -303,6 +308,28 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
     font-size:15px;
     margin-bottom:32px;
   }
+
+  .cohort-banner{
+    max-width:440px;
+    margin:0 auto 32px;
+    text-align:center;
+  }
+  .cohort-text{font-size:15px;color:var(--text);margin-bottom:10px;}
+  .cohort-text strong{font-weight:600;}
+  .cohort-count{color:var(--accent-orange);font-weight:600;}
+  .cohort-bar{
+    height:6px;
+    background:var(--border);
+    border-radius:9999px;
+    overflow:hidden;
+  }
+  .cohort-bar-fill{
+    height:100%;
+    width:23.5%;
+    background:var(--accent-orange);
+    border-radius:9999px;
+  }
+
   .stat-row{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -333,6 +360,24 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
   .tile-pain{color:var(--muted);font-size:15px;line-height:1.6;}
   .tile-arrow{color:var(--muted);font-weight:600;font-size:17px;margin:12px 0;}
   .tile-result{color:var(--text);font-weight:500;font-size:15px;line-height:1.6;}
+
+  .more-industries-group{display:none;}
+  .more-industries-group.expanded{display:contents;}
+
+  .industries-toggle{
+    display:block;
+    margin:32px auto 0;
+    background:none;
+    border:none;
+    color:var(--accent-blue);
+    font-family:inherit;
+    font-size:15px;
+    font-weight:500;
+    cursor:pointer;
+    padding:8px;
+    min-height:44px;
+  }
+  .industries-toggle:hover{text-decoration:underline;}
 
   /* ================= HOW IT WORKS ================= */
   .steps{
@@ -653,7 +698,10 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
 <!-- ================= NAVBAR ================= -->
 <nav class="navbar">
   <div class="container">
-    <a href="#top" class="navbar-logo">Metryx</a>
+    <div style="display: flex; flex-direction: column; align-items: left;">
+      <a href="#top" class="navbar-logo">Metryx</a>
+      <span style="font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: gray;">Automation</span>
+    </div>
     <a href="#booking" class="btn">Book demo</a>
   </div>
 </nav>
@@ -662,12 +710,13 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
 <section class="hero">
   <div class="container">
     <div class="hero-copy">
-      <h1>What if your business could save time and make money by automating repitive parts?</h1>
+      <h1>What if your business could <span class="cohort-count">save time</span> and <span class="cohort-count">grow revenue</span> by automating repetitive tasks?</h1>
       <p class="hero-sub">Metryx automates systems for South African businesses - so your team focuses on the work only humans can do.</p>
 
       <div class="hero-ctas">
         <a href="#booking" class="btn">Book a free 30-min call</a>
         <a href="#insight" class="btn-secondary-link">See what we automate &darr;</a>
+        <a href="YOUR_DEMO_VIDEO_URL" class="btn-secondary-link" target="_blank" rel="noopener">See a 2-min demo first &rarr;</a>
       </div>
 
       <div class="cycling-block">
@@ -701,20 +750,30 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
             <div class="hero-auto-title">Reporting &amp; admin</div>
             <div class="hero-auto-desc">A daily summary lands in your inbox. Zero manual data entry.</div>
           </div>
+          <div class="hero-auto-card">
+            <div class="icon-badge blue"><i class="ti ti-scale"></i></div>
+            <div class="hero-auto-title">FICA &amp; intake</div>
+            <div class="hero-auto-desc">New inquiry gets an intake form instantly. FICA docs chased until they're in.</div>
+          </div>
+          <div class="hero-auto-card">
+            <div class="icon-badge green"><i class="ti ti-building-store"></i></div>
+            <div class="hero-auto-title">After-hours leads</div>
+            <div class="hero-auto-desc">AutoTrader lead at 11pm gets a reply before the rep wakes up.</div>
+          </div>
         </div>
       </div>
 
       <div class="hero-stat-card hero-stat-card--top">
-        <div class="hero-stat-value">60 sec</div>
-        <div class="hero-stat-label">Quote sent</div>
+        <div class="hero-stat-value">R0</div>
+        <div class="hero-stat-label">To get started</div>
       </div>
       <div class="hero-stat-card hero-stat-card--bottom">
-        <div class="hero-stat-value">24/7</div>
-        <div class="hero-stat-label">Never misses a lead</div>
+        <div class="hero-stat-value">3 days</div>
+        <div class="hero-stat-label">To go live</div>
       </div>
       <div class="hero-stat-card hero-stat-card--right">
-        <div class="hero-stat-value">100%</div>
-        <div class="hero-stat-label">Custom built</div>
+        <div class="hero-stat-value">Your tools</div>
+        <div class="hero-stat-label">No new software to learn</div>
       </div>
     </div>
   </div>
@@ -723,7 +782,10 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
 <!-- ================= SOCIAL PROOF BAR ================= -->
 <section class="proofbar">
   <div class="container">
-    <p class="proofbar-line">Trusted by founding clients across Johannesburg</p>
+    <div class="cohort-banner">
+      <p class="cohort-text"><strong>17 founding client spots</strong> in Johannesburg &mdash; <span class="cohort-count">4 filled</span></p>
+      <div class="cohort-bar"><div class="cohort-bar-fill"></div></div>
+    </div>
     <div class="stat-row">
       <div class="stat">
         <div class="stat-value">30 min</div>
@@ -778,47 +840,51 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
         <p class="tile-result">Intake automated. FICA collected. Consultation scheduled.</p>
       </div>
 
-      <div class="tile">
-        <div class="icon-badge green"><i class="ti ti-stethoscope"></i></div>
-        <span class="pill pill-green">Medical / Dental Practice</span>
-        <p class="tile-pain">Receptionist calls every patient to confirm. Half don't answer. No-shows cost thousands a month.</p>
-        <div class="tile-arrow">&rarr;</div>
-        <p class="tile-result">WhatsApp reminder sent 24hrs and 2hrs before. Auto-confirmed.</p>
-      </div>
+      <div class="more-industries-group" id="moreIndustries">
+        <div class="tile">
+          <div class="icon-badge green"><i class="ti ti-stethoscope"></i></div>
+          <span class="pill pill-green">Medical / Dental Practice</span>
+          <p class="tile-pain">Receptionist calls every patient to confirm. Half don't answer. No-shows cost thousands a month.</p>
+          <div class="tile-arrow">&rarr;</div>
+          <p class="tile-result">WhatsApp reminder sent 24hrs and 2hrs before. Auto-confirmed.</p>
+        </div>
 
-      <div class="tile">
-        <div class="icon-badge blue"><i class="ti ti-home"></i></div>
-        <span class="pill pill-blue">Property Rental Agency</span>
-        <p class="tile-pain">Lease expiry tracked on a spreadsheet. Renewal notices sent when someone remembers.</p>
-        <div class="tile-arrow">&rarr;</div>
-        <p class="tile-result">90-day warning fires automatically. Renewal drafted and sent.</p>
-      </div>
+        <div class="tile">
+          <div class="icon-badge blue"><i class="ti ti-home"></i></div>
+          <span class="pill pill-blue">Property Rental Agency</span>
+          <p class="tile-pain">Lease expiry tracked on a spreadsheet. Renewal notices sent when someone remembers.</p>
+          <div class="tile-arrow">&rarr;</div>
+          <p class="tile-result">90-day warning fires automatically. Renewal drafted and sent.</p>
+        </div>
 
-      <div class="tile">
-        <div class="icon-badge purple"><i class="ti ti-truck"></i></div>
-        <span class="pill pill-purple">Logistics / Courier</span>
-        <p class="tile-pain">Driver completes delivery. Calls in manually. Manager updates spreadsheet. Client notified eventually.</p>
-        <div class="tile-arrow">&rarr;</div>
-        <p class="tile-result">Delivery triggers client notification, POD capture, invoice.</p>
-      </div>
+        <div class="tile">
+          <div class="icon-badge purple"><i class="ti ti-truck"></i></div>
+          <span class="pill pill-purple">Logistics / Courier</span>
+          <p class="tile-pain">Driver completes delivery. Calls in manually. Manager updates spreadsheet. Client notified eventually.</p>
+          <div class="tile-arrow">&rarr;</div>
+          <p class="tile-result">Delivery triggers client notification, POD capture, invoice.</p>
+        </div>
 
-      <div class="tile">
-        <div class="icon-badge orange"><i class="ti ti-users"></i></div>
-        <span class="pill pill-orange">Recruitment Agency</span>
-        <p class="tile-pain">CV lands in shared inbox. Sits there. Candidate follows up three times before anyone responds.</p>
-        <div class="tile-arrow">&rarr;</div>
-        <p class="tile-result">CV parsed instantly. Candidate notified. Interview offered.</p>
-      </div>
+        <div class="tile">
+          <div class="icon-badge orange"><i class="ti ti-users"></i></div>
+          <span class="pill pill-orange">Recruitment Agency</span>
+          <p class="tile-pain">CV lands in shared inbox. Sits there. Candidate follows up three times before anyone responds.</p>
+          <div class="tile-arrow">&rarr;</div>
+          <p class="tile-result">CV parsed instantly. Candidate notified. Interview offered.</p>
+        </div>
 
-      <div class="tile">
-        <div class="icon-badge green"><i class="ti ti-tools-kitchen-2"></i></div>
-        <span class="pill pill-green">Restaurant / Hospitality</span>
-        <p class="tile-pain">Booking comes in on WhatsApp. Owner manually confirms. Forgets to remind. No-show.</p>
-        <div class="tile-arrow">&rarr;</div>
-        <p class="tile-result">Booking confirmed, calendar updated, reminder sent.</p>
+        <div class="tile">
+          <div class="icon-badge green"><i class="ti ti-tools-kitchen-2"></i></div>
+          <span class="pill pill-green">Restaurant / Hospitality</span>
+          <p class="tile-pain">Booking comes in on WhatsApp. Owner manually confirms. Forgets to remind. No-show.</p>
+          <div class="tile-arrow">&rarr;</div>
+          <p class="tile-result">Booking confirmed, calendar updated, reminder sent.</p>
+        </div>
       </div>
 
     </div>
+
+    <button type="button" class="industries-toggle" id="industriesToggleBtn">+ See more industries</button>
   </div>
 </section>
 
@@ -1314,6 +1380,20 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
       question.setAttribute("aria-expanded", String(!isOpen));
     });
   });
+
+  /* ============================================================
+     MORE INDUSTRIES TOGGLE
+     ============================================================ */
+
+  const moreIndustries = document.getElementById("moreIndustries");
+  const industriesToggleBtn = document.getElementById("industriesToggleBtn");
+  if (moreIndustries && industriesToggleBtn) {
+    industriesToggleBtn.addEventListener("click", function(){
+      const isExpanded = moreIndustries.classList.contains("expanded");
+      moreIndustries.classList.toggle("expanded", !isExpanded);
+      industriesToggleBtn.textContent = isExpanded ? "+ See more industries" : "- Show fewer industries";
+    });
+  }
 })();
 </script>
 
