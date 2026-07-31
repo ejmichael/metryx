@@ -716,7 +716,6 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
       <div class="hero-ctas">
         <a href="#booking" class="btn">Book a free 30-min call</a>
         <a href="#insight" class="btn-secondary-link">See what we automate &darr;</a>
-        <a href="YOUR_DEMO_VIDEO_URL" class="btn-secondary-link" target="_blank" rel="noopener">See a 2-min demo first &rarr;</a>
       </div>
 
       <div class="cycling-block">
@@ -789,7 +788,7 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
     <div class="stat-row">
       <div class="stat">
         <div class="stat-value">30 min</div>
-        <div class="stat-label">Free discovery call</div>
+        <div class="stat-label">Free consultation</div>
       </div>
       <div class="stat">
         <div class="stat-value">R0</div>
@@ -1182,12 +1181,13 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
   // Fixed weekly availability pattern.
   // Keys are JS Date.getDay() values: 0=Sun ... 6=Sat
   const SLOT_PATTERN = {
-    2: ["18:00","18:30","19:00","19:30"], // Tuesday evenings
-    4: ["18:00","18:30","19:00","19:30"], // Thursday evenings
+    2: ["15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30"], // Tuesday
+    4: ["15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30"], // Thursday
+    5: ["15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30"], // Friday
     6: ["09:00","09:30","10:00","10:30","11:00"] // Saturday mornings
   };
 
-  const HOW_MANY_MATCHING_DAYS = 9; // 3 weeks x 3 matching weekdays
+  const HOW_MANY_MATCHING_DAYS = 12; // 3 weeks x 4 matching weekdays
 
   const WEEKDAY_FULL = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const WEEKDAY_SHORT = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
