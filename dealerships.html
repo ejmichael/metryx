@@ -1,0 +1,828 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metryx Data - While You Were Off, Your Competitor Took Your Lead</title>
+<meta name="description" content="Metryx is the AI system that responds to your AutoTrader and Cars.co.za leads instantly - so the first dealership to reply is always yours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+<!-- META PIXEL HERE -->
+
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --surface:#F6F5F2;
+    --border:#E7E5DE;
+    --text:#14130E;
+    --muted:#6B6966;
+    --accent:#E8A020;
+    --accent-ink:#14130E;
+    --accent-text:#B5760C;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',-apple-system,sans-serif;
+    font-size:17px;
+    line-height:1.75;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  p{margin:0;}
+
+  .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+  .section{padding:64px 0;}
+  @media(min-width:768px){ .section{padding:100px 0;} }
+
+  .btn{
+    display:inline-block;
+    background:var(--accent);
+    color:var(--accent-ink);
+    font-weight:600;
+    font-family:inherit;
+    font-size:16px;
+    padding:16px 28px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+    transition:background .15s ease;
+    min-height:48px;
+  }
+  .btn:hover{background:#F0AC28;}
+  .btn:disabled{opacity:.55;cursor:not-allowed;}
+  .btn-block{display:block;width:100%;text-align:center;}
+  @media(min-width:640px){ .btn-block{display:inline-block;width:auto;} }
+
+  /* ================= SECTION 1: MINIMAL NAV ================= */
+  .navbar{
+    border-bottom:1px solid var(--border);
+  }
+  .navbar .container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:72px;
+  }
+  .navbar-logo{color:var(--accent);font-weight:600;font-size:15px;}
+  .navbar .btn{padding:10px 20px;min-height:auto;font-size:14px;border-radius:9999px;}
+
+  /* ================= SECTION 2: TYPOGRAPHIC HERO ================= */
+  .hero{padding:64px 0 56px;}
+  @media(min-width:768px){ .hero{padding:100px 0 72px;} }
+  .hero-label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:28px;
+  }
+  .hero-line{
+    font-size:clamp(32px,8vw,72px);
+    font-weight:700;
+    line-height:1.05;
+    letter-spacing:-0.02em;
+    color:var(--text);
+  }
+  .hero-line--accent{color:var(--accent-text);}
+  .hero-rule{border:none;border-top:1px solid var(--border);margin:36px 0 28px;width:100%;}
+  .hero-sub{
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.75;
+    max-width:600px;
+    margin-bottom:32px;
+  }
+  .hero-note{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:16px;
+  }
+
+  /* ================= SECTION 3: TIMESTAMP STORY ================= */
+  .timeline-section{padding:48px 0;}
+  @media(min-width:768px){ .timeline-section{padding:80px 0;} }
+  .timeline-row{
+    display:flex;
+    gap:28px;
+    align-items:baseline;
+    padding:24px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .timeline-row:last-of-type{border-bottom:none;}
+  @media(max-width:639px){
+    .timeline-row{flex-direction:column;gap:8px;}
+  }
+  .timeline-time{
+    width:140px;
+    flex-shrink:0;
+    font-family:'Courier New',monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--muted);
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .timeline-time-value{font-size:15px;color:var(--text);}
+  .timeline-dot{width:8px;height:8px;border-radius:50%;background:#c0392b;display:inline-block;}
+  .timeline-event{font-size:24px;line-height:1.35;color:var(--text);}
+  .timeline-event--muted{color:var(--muted);}
+  .timeline-event--accent{color:var(--accent-text);font-weight:600;}
+  .timeline-footer{
+    text-align:right;
+    font-size:14px;
+    color:var(--muted);
+    font-style:italic;
+    margin-top:20px;
+  }
+
+  /* ================= SECTION 4: WHATSAPP PROOF VISUAL ================= */
+  .wa-intro{
+    text-align:center;
+    font-size:13px;
+    color:var(--muted);
+    max-width:400px;
+    margin:0 auto 32px;
+  }
+  .phone-frame{
+    max-width:340px;
+    margin:0 auto;
+    background:#111111;
+    border:1px solid #2A2A2A;
+    border-radius:24px;
+    overflow:hidden;
+  }
+  @media(max-width:479px){
+    .phone-frame{max-width:100%;border-radius:12px;}
+  }
+  /* the phone mockup intentionally stays dark regardless of page theme, so its colors are hardcoded, not var()-based */
+  .wa-header{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:14px 16px;
+    border-bottom:1px solid #1E1E1E;
+    background:#141414;
+  }
+  .wa-header-dot{width:8px;height:8px;border-radius:50%;background:#25D366;flex-shrink:0;}
+  .wa-header-name{font-size:14px;font-weight:500;color:#F0EEE8;}
+  .wa-body{
+    padding:18px 14px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    background-image:radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size:14px 14px;
+    background-color:#111111;
+  }
+  .wa-bubble{
+    max-width:84%;
+    padding:10px 14px;
+    border-radius:14px;
+    font-size:14px;
+    line-height:1.5;
+    color:#F0EEE8;
+  }
+  .wa-bubble--in{background:#1E2A1E;align-self:flex-start;border-bottom-left-radius:4px;}
+  .wa-bubble--out{background:#1A3A1A;align-self:flex-end;border-bottom-right-radius:4px;}
+  .wa-time{display:block;font-size:10px;color:var(--muted);margin-top:5px;}
+  .wa-bubble--out .wa-time{text-align:right;}
+  .wa-time i{font-size:12px;color:#8fd19e;vertical-align:middle;margin-left:2px;}
+  .wa-auto-label{display:block;font-size:10px;color:var(--accent);margin-top:2px;text-align:right;}
+
+  .wa-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    max-width:480px;
+    margin:44px auto 0;
+    text-align:center;
+  }
+  .wa-stat{border-top:1px solid var(--border);padding-top:14px;}
+  .wa-stat-value{font-size:clamp(20px,5vw,28px);font-weight:700;color:var(--text);}
+  .wa-stat-value--accent{color:var(--accent-text);}
+  .wa-stat-label{font-size:12px;color:var(--muted);margin-top:6px;}
+
+  /* ================= SECTION 5: ASYMMETRIC PROOF ================= */
+  .proof-asym{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+  @media(min-width:768px){
+    .proof-asym{grid-template-columns:1.5fr 1fr;gap:64px;}
+  }
+  .proof-keyword{
+    font-size:48px;
+    font-weight:700;
+    color:var(--accent-text);
+    letter-spacing:-0.02em;
+    margin-bottom:16px;
+  }
+  .proof-body{font-size:15px;color:var(--muted);line-height:1.7;max-width:440px;}
+  .proof-side{display:flex;flex-direction:column;}
+  .proof-point{padding:22px 0;border-bottom:1px solid var(--border);}
+  .proof-side .proof-point:last-child{border-bottom:none;padding-bottom:0;}
+  .proof-side .proof-point:first-child{padding-top:0;}
+  .proof-label{
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--text);
+    margin-bottom:10px;
+  }
+  .proof-point p{font-size:15px;color:var(--muted);line-height:1.7;}
+
+  /* ================= SECTION 6: SOCIAL PROOF ================= */
+  .proof-heading{
+    text-align:center;
+    font-size:clamp(1.5rem,4vw,2.1rem);
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin-bottom:28px;
+  }
+  .rule-center{border:none;border-top:1px solid var(--border);width:60px;margin:0 auto 28px;}
+  .proof-honest{
+    text-align:center;
+    color:var(--muted);
+    max-width:500px;
+    margin:0 auto;
+    font-size:16px;
+    line-height:1.75;
+  }
+
+  /* ================= SECTION 7: BOOKING ================= */
+  .booking-heading{
+    text-align:center;
+    font-size:clamp(1.6rem,4.5vw,2.25rem);
+    font-weight:600;
+    letter-spacing:-0.02em;
+    max-width:680px;
+    margin:0 auto 16px;
+  }
+  .booking-sub{
+    text-align:center;
+    color:var(--muted);
+    max-width:560px;
+    margin:0 auto 44px;
+    font-size:16px;
+    line-height:1.7;
+  }
+  .booking-widget{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:28px 20px;
+    max-width:600px;
+    margin:0 auto;
+  }
+  @media(min-width:640px){ .booking-widget{padding:36px;} }
+
+  .booking-step h3{font-size:19px;margin-bottom:20px;font-weight:600;}
+
+  .date-list{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding-bottom:6px;
+    margin-bottom:24px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+  .date-list::-webkit-scrollbar{height:4px;}
+  .date-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+  @media(min-width:768px){
+    .date-list{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+      overflow-x:visible;
+    }
+  }
+  .date-btn{
+    flex-shrink:0;
+    scroll-snap-align:start;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:9999px;
+    padding:12px 18px;
+    min-height:48px;
+    color:var(--text);
+    font-family:inherit;
+    font-size:14px;
+    font-weight:500;
+    white-space:nowrap;
+    cursor:pointer;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .date-btn:hover{border-color:var(--accent);}
+  .date-btn.selected{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600;}
+
+  .time-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:28px;
+  }
+  .time-btn{
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:9999px;
+    padding:12px 18px;
+    min-height:48px;
+    color:var(--text);
+    font-family:inherit;
+    font-size:15px;
+    cursor:pointer;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .time-btn:hover{border-color:var(--accent);}
+  .time-btn.selected{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600;}
+
+  .link-back{
+    display:inline-block;
+    background:none;
+    border:none;
+    color:var(--muted);
+    font-family:inherit;
+    font-size:14px;
+    cursor:pointer;
+    margin-bottom:18px;
+    padding:0;
+    min-height:44px;
+  }
+  .link-back:hover{color:var(--accent);}
+
+  .selected-slot-label{
+    color:var(--accent);
+    font-weight:500;
+    margin-bottom:24px;
+    font-size:16px;
+  }
+
+  .form-group{margin-bottom:20px;}
+  .form-group label{
+    display:block;
+    font-size:14px;
+    color:var(--muted);
+    margin-bottom:6px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea{
+    width:100%;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:14px;
+    color:var(--text);
+    font-family:inherit;
+    font-size:16px;
+    min-height:48px;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus{
+    outline:none;
+    border-color:var(--accent);
+  }
+  .form-group textarea{min-height:96px;resize:vertical;}
+  .form-group select{cursor:pointer;}
+
+  .form-error{
+    background:rgba(190,50,50,0.08);
+    border:1px solid rgba(190,50,50,0.35);
+    color:#a83232;
+    border-radius:8px;
+    padding:12px 14px;
+    font-size:15px;
+    margin-bottom:20px;
+  }
+
+  .booking-confirmation{text-align:center;padding:20px 0;}
+  .booking-confirmation i{font-size:44px;color:var(--accent);margin-bottom:20px;display:inline-block;}
+  .booking-confirmation h3{font-size:22px;margin-bottom:14px;font-weight:600;}
+  .booking-confirmation p{color:var(--muted);}
+
+  .booking-note{
+    color:var(--muted);
+    font-size:15px;
+    max-width:600px;
+    margin:24px auto 0;
+    text-align:center;
+  }
+  .booking-note strong{color:var(--text);font-weight:500;}
+
+  /* ================= SECTION 8: MICRO FOOTER ================= */
+  .mini-footer{padding:32px 0 48px;text-align:center;}
+  .mini-footer p{color:var(--muted);font-size:13px;margin-bottom:10px;}
+  .mini-footer a{color:var(--muted);font-size:13px;}
+  .mini-footer a:hover{color:var(--accent);}
+</style>
+</head>
+<body>
+
+<a id="top"></a>
+
+<!-- ================= SECTION 1: MINIMAL NAV ================= -->
+<nav class="navbar">
+  <div class="container">
+    <a href="#top" class="navbar-logo">Metryx</a>
+    <a href="#booking" class="btn">Book a demo</a>
+  </div>
+</nav>
+
+<!-- ================= SECTION 2: TYPOGRAPHIC HERO ================= -->
+<section class="hero">
+  <div class="container">
+    <span class="hero-label">For Joburg car dealerships</span>
+    <div class="hero-line">While you were off</div>
+    <div class="hero-line">on Saturday,</div>
+    <div class="hero-line hero-line--accent">your competitor took your lead.</div>
+
+    <hr class="hero-rule">
+
+    <p class="hero-sub">Metryx is the AI system that responds to your AutoTrader and Cars.co.za leads instantly - so the first dealership to reply is always yours.</p>
+
+    <a href="#booking" class="btn btn-block">Book a free demo - see it live with your business</a>
+    <p class="hero-note">30 min &middot; Free &middot; Joburg dealerships only</p>
+  </div>
+</section>
+
+<!-- ================= SECTION 3: THE TIMESTAMP STORY ================= -->
+<section class="timeline-section">
+  <div class="container">
+    <div class="timeline-row">
+      <div class="timeline-time">
+        <span class="timeline-time-value">20:14</span>
+        <span>Saturday</span>
+      </div>
+      <div class="timeline-event">A buyer enquires about a Polo GTI.</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">
+        <span class="timeline-time-value">08:47</span>
+        <span>Monday</span>
+      </div>
+      <div class="timeline-event timeline-event--muted">Your sales rep opens his inbox.</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-time">
+        <span class="timeline-dot"></span>
+      </div>
+      <div class="timeline-event timeline-event--accent">Competitor already closed the deal.</div>
+    </div>
+    <p class="timeline-footer">Sound familiar?</p>
+  </div>
+</section>
+
+<!-- ================= SECTION 4: WHATSAPP PROOF VISUAL ================= -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <p class="wa-intro">This conversation happened automatically. Your sales rep was asleep.</p>
+
+    <div class="phone-frame">
+      <div class="wa-header">
+        <span class="wa-header-dot"></span>
+        <span class="wa-header-name">Workshop Customer</span>
+      </div>
+      <div class="wa-body">
+        <div class="wa-bubble wa-bubble--in">
+          <p>Hi, is the Polo GTI 2024 you have listed on AutoTrader still available?</p>
+          <span class="wa-time">20:14 &middot; Sat</span>
+        </div>
+        <div class="wa-bubble wa-bubble--out">
+          <p>Hi! Yes, the Polo GTI is still available &#x1F64C; Quick question - are you looking to finance or pay cash?</p>
+          <span class="wa-time">20:15 &middot; Sat <i class="ti ti-checks"></i></span>
+          <span class="wa-auto-label">Metryx - automated</span>
+        </div>
+        <div class="wa-bubble wa-bubble--in">
+          <p>Finance please</p>
+          <span class="wa-time">20:18 &middot; Sat</span>
+        </div>
+        <div class="wa-bubble wa-bubble--out">
+          <p>Great - I have a test drive slot open Monday at 10am or Wednesday at 2pm. Which works better for you?</p>
+          <span class="wa-time">20:18 &middot; Sat <i class="ti ti-checks"></i></span>
+        </div>
+        <div class="wa-bubble wa-bubble--in">
+          <p>Monday 10am works &#x1F44D;</p>
+          <span class="wa-time">20:21 &middot; Sat</span>
+        </div>
+        <div class="wa-bubble wa-bubble--out">
+          <p>You're confirmed for Monday at 10am &#x2705; I'll send a reminder Sunday evening. See you then!</p>
+          <span class="wa-time">20:21 &middot; Sat <i class="ti ti-checks"></i></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="wa-stats">
+      <div class="wa-stat">
+        <div class="wa-stat-value">&lt; 2 min</div>
+        <div class="wa-stat-label">First response</div>
+      </div>
+      <div class="wa-stat">
+        <div class="wa-stat-value">24/7</div>
+        <div class="wa-stat-label">No days off</div>
+      </div>
+      <div class="wa-stat">
+        <div class="wa-stat-value wa-stat-value--accent">100%</div>
+        <div class="wa-stat-label">Leads answered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SECTION 5: THREE PROOF POINTS (ASYMMETRIC) ================= -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="proof-asym">
+      <div class="proof-main">
+        <div class="proof-keyword">2 minutes</div>
+        <p class="proof-body">Every lead from AutoTrader, Cars.co.za, or your website gets a professional WhatsApp reply before your competitor picks up the phone.</p>
+      </div>
+      <div class="proof-side">
+        <div class="proof-point">
+          <div class="proof-label">Qualifies the buyer</div>
+          <p>Confirms budget, finance vs cash, preferred vehicle — then drops the test drive into your sales rep's calendar.</p>
+        </div>
+        <div class="proof-point">
+          <div class="proof-label">Works while you sleep</div>
+          <p>Saturday nights. Sundays. Public holidays. Every enquiry gets the same professional response.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SECTION 6: SOCIAL PROOF ================= -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <h2 class="proof-heading">Working with dealerships across Johannesburg</h2>
+    <hr class="rule-center">
+    <p class="proof-honest">Metryx is currently in its founding cohort - a small group of Joburg dealerships getting early access before the full launch.</p>
+  </div>
+</section>
+
+<!-- ================= SECTION 7: BOOKING ================= -->
+<section class="section" id="booking">
+  <div class="container">
+    <h2 class="booking-heading">Watch it handle a Saturday night AutoTrader lead. In real time.</h2>
+    <p class="booking-sub">30 minutes with Ethan. He'll run a live demo using your dealership's actual lead scenario - you'll see the full WhatsApp conversation play out in real time.</p>
+
+    <div class="booking-widget" id="bookingWidget">
+
+      <!-- STEP 1: slot picker -->
+      <div class="booking-step" id="bookingStep1">
+        <h3>Pick a time</h3>
+        <div class="date-list" id="dateList"></div>
+        <div class="time-list" id="timeList" hidden></div>
+        <button type="button" class="btn btn-block" id="toStep2Btn" disabled>Next</button>
+      </div>
+
+      <!-- STEP 2: details form -->
+      <div class="booking-step" id="bookingStep2" hidden>
+        <button type="button" class="link-back" id="backToStep1">&larr; Change time</button>
+        <p class="selected-slot-label" id="selectedSlotLabel"></p>
+
+        <form id="bookingForm">
+          <div class="form-group">
+            <label for="fieldName">Full name</label>
+            <input type="text" id="fieldName" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="fieldEmail">Email address</label>
+            <input type="email" id="fieldEmail" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="fieldWhatsapp">WhatsApp number</label>
+            <input type="tel" id="fieldWhatsapp" name="whatsapp" placeholder="071 xxx xxxx" required>
+          </div>
+          <div class="form-group">
+            <label for="fieldDealership">Dealership name</label>
+            <input type="text" id="fieldDealership" name="business" required>
+          </div>
+          <div class="form-group">
+            <label for="fieldLeadsPerWeek">Leads per week</label>
+            <select id="fieldLeadsPerWeek" name="leads_per_week" required>
+              <option value="" disabled selected>Select an option</option>
+              <option value="Under 10">Under 10</option>
+              <option value="10–30">10–30</option>
+              <option value="30–60">30–60</option>
+              <option value="60+">60+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fieldPain">Biggest lead challenge right now</label>
+            <textarea id="fieldPain" name="pain_point" required></textarea>
+          </div>
+
+          <div class="form-error" id="formError" hidden></div>
+
+          <button type="submit" class="btn btn-block" id="submitBtn">Confirm my demo booking</button>
+        </form>
+      </div>
+
+      <!-- STEP 3: confirmation -->
+      <div class="booking-confirmation" id="bookingConfirmation" hidden>
+        <i class="ti ti-circle-check"></i>
+        <h3>You're booked.</h3>
+        <p>Check your email for the Google Meet link. Ethan will prepare a live demo using a real Saturday night lead scenario before the call.</p>
+      </div>
+
+    </div>
+
+    <p class="booking-note">Confirmation email sent immediately with Google Meet link. Reminder 24 hours before and 1 hour before the call.<br><strong>ethan@metryxdata.co.za</strong> &middot; Johannesburg</p>
+  </div>
+</section>
+
+<!-- ================= SECTION 8: MICRO FOOTER ================= -->
+<footer class="mini-footer">
+  <div class="container">
+    <p>&copy; 2026 Metryx Data &middot; ethan@metryxdata.co.za &middot; Johannesburg</p>
+    <a href="index.html">&larr; metryxdata.co.za</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================================================
+     CONFIG
+     ============================================================ */
+
+  // Replace this with the live n8n webhook URL before going live.
+  const WEBHOOK_URL = "https://n8n.metryx.co.za/webhook/metryx-booking";
+
+  // Fixed weekly availability pattern.
+  // Keys are JS Date.getDay() values: 0=Sun ... 6=Sat
+  const SLOT_PATTERN = {
+    2: ["15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30"], // Tuesday
+    4: ["15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30"], // Thursday
+    5: ["09:00","09:30","10:00","10:30","11:00"], // Friday mornings
+    6: ["09:00","09:30","10:00","10:30","11:00"] // Saturday mornings
+  };
+
+  const HOW_MANY_MATCHING_DAYS = 12; // 3 weeks x 4 matching weekdays
+
+  const WEEKDAY_FULL = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const WEEKDAY_SHORT = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  const MONTH_FULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const MONTH_SHORT = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  /* ============================================================
+     BOOKING WIDGET
+     ============================================================ */
+
+  function pad2(n){ return String(n).padStart(2, "0"); }
+
+  function generateAvailableDates(){
+    const days = [];
+    const now = new Date();
+    for (let i = 1; days.length < HOW_MANY_MATCHING_DAYS && i <= 60; i++){
+      const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i);
+      const times = SLOT_PATTERN[d.getDay()];
+      if (times) days.push({ date: d, times: times });
+    }
+    return days;
+  }
+
+  function formatDateISO(d){
+    return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate());
+  }
+
+  function toISODateTime(d, time){
+    return formatDateISO(d) + "T" + time + ":00+02:00";
+  }
+
+  function formatSlotLabel(d, time){
+    return WEEKDAY_FULL[d.getDay()] + ", " + d.getDate() + " " + MONTH_FULL[d.getMonth()] + " " + d.getFullYear() + " at " + time + " (SAST)";
+  }
+
+  const state = { date: null, time: null };
+
+  const dateListEl = document.getElementById("dateList");
+  const timeListEl = document.getElementById("timeList");
+  const toStep2Btn = document.getElementById("toStep2Btn");
+  const bookingStep1 = document.getElementById("bookingStep1");
+  const bookingStep2 = document.getElementById("bookingStep2");
+  const bookingConfirmation = document.getElementById("bookingConfirmation");
+  const selectedSlotLabelEl = document.getElementById("selectedSlotLabel");
+  const bookingForm = document.getElementById("bookingForm");
+  const formErrorEl = document.getElementById("formError");
+  const submitBtn = document.getElementById("submitBtn");
+
+  function renderDates(){
+    const days = generateAvailableDates();
+    dateListEl.innerHTML = "";
+    days.forEach(function(day){
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "date-btn";
+      btn.textContent = WEEKDAY_SHORT[day.date.getDay()] + " " + day.date.getDate() + " " + MONTH_SHORT[day.date.getMonth()];
+      btn.addEventListener("click", function(){ selectDate(day, btn); });
+      dateListEl.appendChild(btn);
+    });
+  }
+
+  function selectDate(day, btnEl){
+    Array.prototype.forEach.call(dateListEl.querySelectorAll(".date-btn.selected"), function(b){
+      b.classList.remove("selected");
+    });
+    btnEl.classList.add("selected");
+
+    state.date = day.date;
+    state.time = null;
+    toStep2Btn.disabled = true;
+
+    timeListEl.innerHTML = "";
+    timeListEl.hidden = false;
+    day.times.forEach(function(t){
+      const tbtn = document.createElement("button");
+      tbtn.type = "button";
+      tbtn.className = "time-btn";
+      tbtn.textContent = t;
+      tbtn.addEventListener("click", function(){ selectTime(t, tbtn); });
+      timeListEl.appendChild(tbtn);
+    });
+  }
+
+  function selectTime(t, btnEl){
+    Array.prototype.forEach.call(timeListEl.querySelectorAll(".time-btn.selected"), function(b){
+      b.classList.remove("selected");
+    });
+    btnEl.classList.add("selected");
+    state.time = t;
+    toStep2Btn.disabled = false;
+  }
+
+  toStep2Btn.addEventListener("click", function(){
+    if (!state.date || !state.time) return;
+    bookingStep1.hidden = true;
+    bookingStep2.hidden = false;
+    selectedSlotLabelEl.textContent = formatSlotLabel(state.date, state.time);
+  });
+
+  document.getElementById("backToStep1").addEventListener("click", function(){
+    bookingStep2.hidden = true;
+    bookingStep1.hidden = false;
+  });
+
+  bookingForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    formErrorEl.hidden = true;
+
+    const data = new FormData(bookingForm);
+    const payload = {
+      name: (data.get("name") || "").trim(),
+      email: (data.get("email") || "").trim(),
+      whatsapp: (data.get("whatsapp") || "").trim(),
+      business: (data.get("business") || "").trim(),
+      industry: "Car Dealership",
+      pain_point: (data.get("pain_point") || "").trim(),
+      leads_per_week: (data.get("leads_per_week") || "").trim(),
+      slot_date: formatDateISO(state.date),
+      slot_time: state.time,
+      slot_datetime_iso: toISODateTime(state.date, state.time),
+      slot_label: formatSlotLabel(state.date, state.time)
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Booking...";
+
+    fetch(WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then(function(res){
+        if (!res.ok) throw new Error("Request failed with status " + res.status);
+        bookingStep2.hidden = true;
+        bookingConfirmation.hidden = false;
+      })
+      .catch(function(){
+        formErrorEl.textContent = "Something went wrong sending your booking. Please try again, or email ethan@metryxdata.co.za directly.";
+        formErrorEl.hidden = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Confirm my demo booking";
+      });
+  });
+
+  renderDates();
+})();
+</script>
+
+</body>
+</html>
