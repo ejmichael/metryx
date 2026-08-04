@@ -323,6 +323,27 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
 
   .booking-step h3{font-size:19px;margin-bottom:20px;font-weight:600;}
 
+  /* ---- availability loading / error / empty states ---- */
+  @keyframes skeletonPulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+  .skeleton-block{
+    background:var(--border);
+    border-radius:10px;
+    animation:skeletonPulse 1.4s ease-in-out infinite;
+  }
+  .skeleton-dates{height:48px;margin-bottom:16px;}
+  .skeleton-times{height:48px;width:55%;margin-bottom:12px;}
+  .skeleton-note{font-size:12px;color:var(--muted);text-align:center;margin-top:4px;}
+  .availability-error,
+  .availability-empty{
+    text-align:center;
+    padding:20px 0;
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.6;
+  }
+  .availability-error a,
+  .availability-empty a{color:var(--accent);font-weight:500;}
+
   .date-list{
     display:flex;
     gap:10px;
@@ -355,10 +376,33 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
     font-weight:500;
     white-space:nowrap;
     cursor:pointer;
+    display:flex;
+    align-items:center;
     transition:border-color .15s ease, background .15s ease;
   }
   .date-btn:hover{border-color:var(--accent);}
   .date-btn.selected{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600;}
+  .date-btn-weekday,.date-btn-date,.date-btn-count{display:none;}
+  .date-btn-pill{font-size:14px;font-weight:500;white-space:nowrap;}
+  .date-btn-dot{display:none;width:6px;height:6px;border-radius:50%;background:currentColor;margin-left:6px;flex-shrink:0;}
+  .date-btn.selected .date-btn-dot{display:inline-block;}
+  @media(min-width:768px){
+    .date-btn{
+      flex-direction:column;
+      align-items:flex-start;
+      border-radius:12px;
+      padding:16px;
+      min-height:auto;
+      gap:4px;
+      font-weight:400;
+    }
+    .date-btn-pill,.date-btn-dot{display:none;}
+    .date-btn-weekday{display:block;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);}
+    .date-btn.selected .date-btn-weekday{color:var(--accent-ink);opacity:.8;}
+    .date-btn-date{display:block;font-size:20px;font-weight:700;}
+    .date-btn-count{display:block;font-size:12px;color:var(--muted);}
+    .date-btn.selected .date-btn-count{color:var(--accent-ink);opacity:.8;}
+  }
 
   .time-list{
     display:flex;
@@ -372,6 +416,7 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
     border-radius:9999px;
     padding:12px 18px;
     min-height:48px;
+    min-width:80px;
     color:var(--text);
     font-family:inherit;
     font-size:15px;
@@ -616,9 +661,26 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
       <!-- STEP 1: slot picker -->
       <div class="booking-step" id="bookingStep1">
         <h3>Pick a time</h3>
-        <div class="date-list" id="dateList"></div>
-        <div class="time-list" id="timeList" hidden></div>
-        <button type="button" class="btn btn-block" id="toStep2Btn" disabled>Next</button>
+
+        <div class="availability-skeleton" id="availabilitySkeleton">
+          <div class="skeleton-block skeleton-dates"></div>
+          <div class="skeleton-block skeleton-times"></div>
+          <p class="skeleton-note">Checking availability...</p>
+        </div>
+
+        <div class="availability-error" id="availabilityError" hidden>
+          <p>Couldn't load available times right now.<br>Email <a href="mailto:ethan@metryxdata.co.za">ethan@metryxdata.co.za</a> to book directly.</p>
+        </div>
+
+        <div class="availability-empty" id="availabilityEmpty" hidden>
+          <p>No available slots in the next 3 weeks.<br>Email <a href="mailto:ethan@metryxdata.co.za">ethan@metryxdata.co.za</a> to arrange a time.</p>
+        </div>
+
+        <div id="pickerContent" hidden>
+          <div class="date-list" id="dateList"></div>
+          <div class="time-list" id="timeList" hidden></div>
+          <button type="button" class="btn btn-block" id="toStep2Btn" hidden>Next</button>
+        </div>
       </div>
 
       <!-- STEP 2: details form -->
@@ -696,21 +758,8 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
   // Replace this with the live n8n webhook URL before going live.
   const WEBHOOK_URL = "https://n8n.metryx.co.za/webhook/metryx-booking";
 
-  // Fixed weekly availability pattern.
-  // Keys are JS Date.getDay() values: 0=Sun ... 6=Sat
-  const SLOT_PATTERN = {
-    2: ["15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30"], // Tuesday
-    4: ["15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30"], // Thursday
-    5: ["09:00","09:30","10:00","10:30","11:00"], // Friday mornings
-    6: ["09:00","09:30","10:00","10:30","11:00"] // Saturday mornings
-  };
-
-  const HOW_MANY_MATCHING_DAYS = 12; // 3 weeks x 4 matching weekdays
-
-  const WEEKDAY_FULL = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const WEEKDAY_SHORT = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-  const MONTH_FULL = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const MONTH_SHORT = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  // Live availability, read from Google Calendar via n8n.
+  const AVAILABILITY_URL = "https://n8n.metryx.co.za/webhook/metryx-availability";
 
   /* ============================================================
      BOOKING WIDGET
@@ -718,30 +767,37 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
 
   function pad2(n){ return String(n).padStart(2, "0"); }
 
-  function generateAvailableDates(){
-    const days = [];
-    const now = new Date();
-    for (let i = 1; days.length < HOW_MANY_MATCHING_DAYS && i <= 60; i++){
-      const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i);
-      const times = SLOT_PATTERN[d.getDay()];
-      if (times) days.push({ date: d, times: times });
-    }
-    return days;
+  // Parses the API's "day_label" (e.g. "Tuesday, 5 August 2026") into display parts.
+  // Avoids re-parsing "date" as a JS Date to sidestep any timezone edge cases —
+  // the server already formatted this correctly for Johannesburg.
+  function parseDayLabel(dayLabel){
+    const parts = dayLabel.split(", ");
+    const weekdayFull = parts[0] || "";
+    const rest = (parts[1] || "").split(" ");
+    return {
+      weekdayFull: weekdayFull,
+      weekdayShort: weekdayFull.slice(0, 3),
+      day: rest[0] || "",
+      monthShort: (rest[1] || "").slice(0, 3)
+    };
   }
 
-  function formatDateISO(d){
-    return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate());
+  function toISODateTime(dateStr, time){
+    return dateStr + "T" + time + ":00+02:00";
   }
 
-  function toISODateTime(d, time){
-    return formatDateISO(d) + "T" + time + ":00+02:00";
+  function formatSlotLabel(dayLabel, time){
+    return dayLabel + " at " + time + " (SAST)";
   }
 
-  function formatSlotLabel(d, time){
-    return WEEKDAY_FULL[d.getDay()] + ", " + d.getDate() + " " + MONTH_FULL[d.getMonth()] + " " + d.getFullYear() + " at " + time + " (SAST)";
+  function generateReservationId(){
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let id = "";
+    for (let i = 0; i < 8; i++) id += chars.charAt(Math.floor(Math.random() * chars.length));
+    return id;
   }
 
-  const state = { date: null, time: null };
+  const state = { slot: null, time: null, reservationId: null };
 
   const dateListEl = document.getElementById("dateList");
   const timeListEl = document.getElementById("timeList");
@@ -753,33 +809,78 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
   const bookingForm = document.getElementById("bookingForm");
   const formErrorEl = document.getElementById("formError");
   const submitBtn = document.getElementById("submitBtn");
+  const availabilitySkeleton = document.getElementById("availabilitySkeleton");
+  const availabilityError = document.getElementById("availabilityError");
+  const availabilityEmpty = document.getElementById("availabilityEmpty");
+  const pickerContent = document.getElementById("pickerContent");
 
-  function renderDates(){
-    const days = generateAvailableDates();
+  function showSkeleton(){
+    availabilitySkeleton.hidden = false;
+    availabilityError.hidden = true;
+    availabilityEmpty.hidden = true;
+    pickerContent.hidden = true;
+  }
+
+  function showAvailabilityError(){
+    availabilitySkeleton.hidden = true;
+    availabilityError.hidden = false;
+    availabilityEmpty.hidden = true;
+    pickerContent.hidden = true;
+  }
+
+  function showEmpty(){
+    availabilitySkeleton.hidden = true;
+    availabilityError.hidden = true;
+    availabilityEmpty.hidden = false;
+    pickerContent.hidden = true;
+  }
+
+  function showPicker(){
+    availabilitySkeleton.hidden = true;
+    availabilityError.hidden = true;
+    availabilityEmpty.hidden = true;
+    pickerContent.hidden = false;
+  }
+
+  function renderDates(slots){
     dateListEl.innerHTML = "";
-    days.forEach(function(day){
+    slots.forEach(function(slot){
+      const parsed = parseDayLabel(slot.day_label);
+      const count = slot.times.length;
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "date-btn";
-      btn.textContent = WEEKDAY_SHORT[day.date.getDay()] + " " + day.date.getDate() + " " + MONTH_SHORT[day.date.getMonth()];
-      btn.addEventListener("click", function(){ selectDate(day, btn); });
+      btn.innerHTML =
+        '<span class="date-btn-weekday">' + parsed.weekdayFull + '</span>' +
+        '<span class="date-btn-date">' + parsed.day + ' ' + parsed.monthShort + '</span>' +
+        '<span class="date-btn-count">' + count + (count === 1 ? ' slot' : ' slots') + '</span>' +
+        '<span class="date-btn-pill">' + parsed.weekdayShort + ' ' + parsed.day + ' ' + parsed.monthShort + '</span>' +
+        '<span class="date-btn-dot"></span>';
+      btn.addEventListener("click", function(){ selectDate(slot, btn); });
       dateListEl.appendChild(btn);
     });
   }
 
-  function selectDate(day, btnEl){
+  function selectDate(slot, btnEl){
     Array.prototype.forEach.call(dateListEl.querySelectorAll(".date-btn.selected"), function(b){
       b.classList.remove("selected");
     });
     btnEl.classList.add("selected");
 
-    state.date = day.date;
+    state.slot = slot;
     state.time = null;
-    toStep2Btn.disabled = true;
+    toStep2Btn.hidden = true;
 
     timeListEl.innerHTML = "";
     timeListEl.hidden = false;
-    day.times.forEach(function(t){
+
+    if (slot.times.length === 1){
+      state.time = slot.times[0];
+      proceedToForm();
+      return;
+    }
+
+    slot.times.forEach(function(t){
       const tbtn = document.createElement("button");
       tbtn.type = "button";
       tbtn.className = "time-btn";
@@ -795,15 +896,33 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
     });
     btnEl.classList.add("selected");
     state.time = t;
-    toStep2Btn.disabled = false;
+    toStep2Btn.hidden = false;
   }
 
-  toStep2Btn.addEventListener("click", function(){
-    if (!state.date || !state.time) return;
+  function reserveSlot(){
+    state.reservationId = generateReservationId();
+    // Best-effort: the n8n side handles reservations separately, so a failure
+    // here shouldn't block the visitor from continuing to the booking form.
+    fetch(WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "reserve",
+        slot_datetime_iso: toISODateTime(state.slot.date, state.time),
+        reservation_id: state.reservationId
+      })
+    }).catch(function(){});
+  }
+
+  function proceedToForm(){
+    if (!state.slot || !state.time) return;
+    reserveSlot();
     bookingStep1.hidden = true;
     bookingStep2.hidden = false;
-    selectedSlotLabelEl.textContent = formatSlotLabel(state.date, state.time);
-  });
+    selectedSlotLabelEl.textContent = formatSlotLabel(state.slot.day_label, state.time);
+  }
+
+  toStep2Btn.addEventListener("click", proceedToForm);
 
   document.getElementById("backToStep1").addEventListener("click", function(){
     bookingStep2.hidden = true;
@@ -823,10 +942,10 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
       industry: "Car Dealership",
       pain_point: (data.get("pain_point") || "").trim(),
       leads_per_week: (data.get("leads_per_week") || "").trim(),
-      slot_date: formatDateISO(state.date),
+      slot_date: state.slot.date,
       slot_time: state.time,
-      slot_datetime_iso: toISODateTime(state.date, state.time),
-      slot_label: formatSlotLabel(state.date, state.time)
+      slot_datetime_iso: toISODateTime(state.slot.date, state.time),
+      slot_label: formatSlotLabel(state.slot.day_label, state.time)
     };
 
     submitBtn.disabled = true;
@@ -850,7 +969,31 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
       });
   });
 
-  renderDates();
+  function loadAvailability(){
+    showSkeleton();
+    fetch(AVAILABILITY_URL, {
+      cache: "no-store",
+      headers: { "Cache-Control": "no-cache" }
+    })
+      .then(function(res){
+        if (!res.ok) throw new Error("Request failed with status " + res.status);
+        return res.json();
+      })
+      .then(function(data){
+        const slots = (data && data.available_slots) || [];
+        if (slots.length === 0){
+          showEmpty();
+          return;
+        }
+        renderDates(slots);
+        showPicker();
+      })
+      .catch(function(){
+        showAvailabilityError();
+      });
+  }
+
+  loadAvailability();
 })();
 </script>
 
