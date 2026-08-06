@@ -993,16 +993,6 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
             <input type="text" id="fieldDealership" name="business" required>
           </div>
           <div class="form-group">
-            <label for="fieldLeadsPerWeek">Leads per week</label>
-            <select id="fieldLeadsPerWeek" name="leads_per_week" required>
-              <option value="" disabled selected>Select an option</option>
-              <option value="Under 10">Under 10</option>
-              <option value="10–30">10–30</option>
-              <option value="30–60">30–60</option>
-              <option value="60+">60+</option>
-            </select>
-          </div>
-          <div class="form-group">
             <label for="fieldSalespeople">How many salespeople are on your team?</label>
             <select id="fieldSalespeople" name="salespeople" required>
               <option value="" disabled selected>Select an option</option>
@@ -1258,7 +1248,6 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
       whatsapp: (data.get("whatsapp") || "").trim(),
       business: (data.get("business") || "").trim(),
       industry: "Car Dealership",
-      leads_per_week: (data.get("leads_per_week") || "").trim(),
       salespeople: (data.get("salespeople") || "").trim(),
       automation_interests: interests,
       // kept for backward compatibility with the existing n8n email/calendar templates,
