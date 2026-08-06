@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Metryx Data - While You Were Off, Your Competitor Took Your Lead</title>
-<meta name="description" content="Metryx is the AI system that responds to your AutoTrader and Cars.co.za leads instantly - so the first dealership to reply is always yours.">
+<title>AI &amp; Automation for Car Dealerships | Metryx Data</title>
+<meta name="description" content="Metryx builds AI and automation systems for car dealerships — from lead response and follow-up to appointments, reviews and sales management.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -166,7 +166,7 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
     gap:4px;
   }
   .timeline-time-value{font-size:15px;color:var(--text);}
-  .timeline-dot{width:8px;height:8px;border-radius:50%;background:#c0392b;display:inline-block;}
+  .timeline-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;}
   .timeline-event{font-size:24px;line-height:1.35;color:var(--text);}
   .timeline-event--muted{color:var(--muted);}
   .timeline-event--accent{color:var(--accent-text);font-weight:600;}
@@ -275,6 +275,125 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
     margin-bottom:10px;
   }
   .proof-point p{font-size:15px;color:var(--muted);line-height:1.7;}
+
+  /* ---- shared: pill-style process flow (sales-leak diagram, WhatsApp labels, examples) ---- */
+  .flow-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:8px 10px;
+  }
+  .flow-step{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:9999px;
+    padding:9px 16px;
+    font-size:13px;
+    font-weight:500;
+    color:var(--text);
+    white-space:nowrap;
+  }
+  .flow-arrow{color:var(--muted);font-size:14px;}
+
+  /* ---- shared: large left-aligned section headline, matches the hero's weight/scale ---- */
+  .section-title{
+    font-size:clamp(1.75rem,4.5vw,2.75rem);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.15;
+    max-width:720px;
+    margin-bottom:20px;
+  }
+  .section-title--sm{font-size:clamp(1.3rem,3vw,1.75rem);}
+
+  /* ---- shared: single-column stacked content list (five systems, more examples) ---- */
+  .stack-list{max-width:760px;margin:0 auto;}
+  .stack-list .proof-point:first-child{padding-top:0;}
+  .stack-list .proof-point:last-child{border-bottom:none;padding-bottom:0;}
+  .system-capabilities{font-size:13px;color:var(--muted);margin-top:12px;line-height:1.6;}
+  .example-label{margin-bottom:12px;}
+
+  /* ---- interactive system cards (click to expand) ---- */
+  .systems-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  @media(min-width:640px){
+    .systems-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  .system-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+    transition:border-color .15s ease;
+  }
+  .system-card:hover{border-color:var(--accent);}
+  .system-card--featured{grid-column:1 / -1;}
+  .system-toggle{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    background:none;
+    border:none;
+    padding:20px;
+    cursor:pointer;
+    font-family:inherit;
+    text-align:left;
+    min-height:48px;
+  }
+  .system-category{
+    display:block;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:6px;
+  }
+  .system-name{display:block;font-size:18px;font-weight:600;color:var(--text);}
+  .system-toggle-icon{font-size:18px;color:var(--accent);flex-shrink:0;transition:transform .2s ease;}
+  .system-card.open .system-toggle-icon{transform:rotate(45deg);}
+  .system-detail{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 20px;}
+  .system-card.open .system-detail{max-height:320px;padding:0 20px 20px;}
+  .system-detail p{font-size:15px;color:var(--muted);line-height:1.7;}
+
+  /* ---- advanced automations: lighter, secondary section ---- */
+  .advanced-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+  @media(min-width:640px){
+    .advanced-grid{grid-template-columns:repeat(2,1fr);gap:32px;}
+  }
+  .advanced-item h4{font-size:16px;font-weight:600;margin-bottom:6px;color:var(--text);}
+  .advanced-item p{font-size:14px;color:var(--muted);line-height:1.6;}
+
+  /* ---- multi-select checkbox group (booking form) ---- */
+  .checkbox-group{display:flex;flex-direction:column;gap:12px;}
+  .checkbox-item{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:15px;
+    color:var(--text);
+    cursor:pointer;
+    line-height:1.4;
+  }
+  .checkbox-item input[type="checkbox"]{
+    width:16px;
+    height:16px;
+    min-height:auto;
+    margin-top:3px;
+    flex-shrink:0;
+    accent-color:var(--accent);
+    cursor:pointer;
+  }
 
   /* ================= SECTION 6: SOCIAL PROOF ================= */
   .proof-heading{
@@ -519,25 +638,124 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
   </div>
 </nav>
 
-<!-- ================= SECTION 2: TYPOGRAPHIC HERO ================= -->
+<!-- ================= SECTION 2: HERO ================= -->
 <section class="hero">
   <div class="container">
-    <span class="hero-label">For Joburg car dealerships</span>
-    <div class="hero-line">While you were off</div>
-    <div class="hero-line">on Saturday,</div>
-    <div class="hero-line hero-line--accent">your competitor took your lead.</div>
+    <span class="hero-label">For South African car dealerships</span>
+    <div class="hero-line">Your dealership is losing money</div>
+    <div class="hero-line hero-line--accent">in places you can't see.</div>
 
     <hr class="hero-rule">
 
-    <p class="hero-sub">Metryx is the AI system that responds to your AutoTrader and Cars.co.za leads instantly - so the first dealership to reply is always yours.</p>
+    <p class="hero-sub">Not just missed leads. Slow follow-up. Missed calls. Unconfirmed test drives. Old leads nobody calls. Manual admin. Customers who never leave a review. Metryx builds AI and automation systems that fix the gaps — from the first enquiry to the post-sale follow-up.</p>
 
-    <a href="#booking" class="btn btn-block">Book a free demo - see it live with your business</a>
-    <p class="hero-note">30 min &middot; Free &middot; Joburg dealerships only</p>
+    <a href="#booking" class="btn btn-block">Find the biggest opportunity in your dealership</a>
+    <p class="hero-note">30 min &middot; Free &middot; No obligation</p>
   </div>
 </section>
 
-<!-- ================= SECTION 3: THE TIMESTAMP STORY ================= -->
-<section class="timeline-section">
+<!-- ================= SECTION 3: THE SALES LEAK ================= -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">You don't need another lead. You need to stop leaking the ones you already have.</h2>
+    <p class="hero-sub">Dealerships spend money generating enquiries, but revenue can disappear between the moment someone enquires and the moment they buy. A slow response, forgotten follow-up, missed call, no-show or neglected old lead can become a lost opportunity.</p>
+
+    <div class="flow-row" style="margin-top:40px;">
+      <span class="flow-step">Lead arrives</span><span class="flow-arrow">&rarr;</span>
+      <span class="flow-step">AI responds</span><span class="flow-arrow">&rarr;</span>
+      <span class="flow-step">Lead qualified</span><span class="flow-arrow">&rarr;</span>
+      <span class="flow-step">Appointment booked</span><span class="flow-arrow">&rarr;</span>
+      <span class="flow-step">Reminder sent</span><span class="flow-arrow">&rarr;</span>
+      <span class="flow-step">Salesperson follows up</span><span class="flow-arrow">&rarr;</span>
+      <span class="flow-step">Deal closed</span><span class="flow-arrow">&rarr;</span>
+      <span class="flow-step">Review requested</span><span class="flow-arrow">&rarr;</span>
+      <span class="flow-step">Old leads reactivated</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SECTION 4: FIVE CORE SYSTEMS ================= -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <h2 class="section-title">One dealership. Five places to automate.</h2>
+    <p class="hero-sub" style="margin-bottom:40px;">Metryx doesn't sell one generic chatbot. Tap each system to see what it actually does.</p>
+
+    <div class="systems-grid" id="systemsGrid">
+      <div class="system-card system-card--featured">
+        <button type="button" class="system-toggle" aria-expanded="false">
+          <span>
+            <span class="system-category">Capture more opportunities</span>
+            <span class="system-name">AI Sales Assistant</span>
+          </span>
+          <i class="ti ti-plus system-toggle-icon"></i>
+        </button>
+        <div class="system-detail">
+          <p>Every new enquiry gets an instant response, answers to common questions, qualification and — when appropriate — a booked appointment.</p>
+          <p class="system-capabilities">Instant WhatsApp response &middot; Vehicle questions &middot; Budget &amp; timeframe &middot; Finance vs cash &middot; Trade-in questions &middot; Test-drive booking &middot; CRM updates &middot; Salesperson notification</p>
+        </div>
+      </div>
+
+      <div class="system-card">
+        <button type="button" class="system-toggle" aria-expanded="false">
+          <span>
+            <span class="system-category">Recover lost opportunities</span>
+            <span class="system-name">Revenue Recovery</span>
+          </span>
+          <i class="ti ti-plus system-toggle-icon"></i>
+        </button>
+        <div class="system-detail">
+          <p>Most dealerships already have opportunities sitting in their CRM. Automatically follow up with prospects who went quiet and re-engage older leads without asking your sales team to manually chase them.</p>
+          <p class="system-capabilities">New lead follow-up &middot; Long-term nurturing &middot; Dead-lead reactivation &middot; Old CRM reactivation &middot; Missed-call recovery</p>
+        </div>
+      </div>
+
+      <div class="system-card">
+        <button type="button" class="system-toggle" aria-expanded="false">
+          <span>
+            <span class="system-category">Keep appointments moving</span>
+            <span class="system-name">Appointment Automation</span>
+          </span>
+          <i class="ti ti-plus system-toggle-icon"></i>
+        </button>
+        <div class="system-detail">
+          <p>From the first booking to the reminder before the test drive, the routine communication happens automatically.</p>
+          <p class="system-capabilities">Test-drive booking &middot; Calendar integration &middot; Confirmation &middot; WhatsApp reminders &middot; SMS reminders &middot; Salesperson notifications &middot; Post-appointment follow-up</p>
+        </div>
+      </div>
+
+      <div class="system-card">
+        <button type="button" class="system-toggle" aria-expanded="false">
+          <span>
+            <span class="system-category">Build reputation</span>
+            <span class="system-name">Review &amp; Post-Sale Automation</span>
+          </span>
+          <i class="ti ti-plus system-toggle-icon"></i>
+        </button>
+        <div class="system-detail">
+          <p>The customer journey shouldn't end when the deal closes. Automatically follow up after the sale and request reviews at the right point.</p>
+          <p class="system-capabilities">Post-sale communication &middot; Review requests &middot; Customer follow-up &middot; Next-step messages</p>
+        </div>
+      </div>
+
+      <div class="system-card">
+        <button type="button" class="system-toggle" aria-expanded="false">
+          <span>
+            <span class="system-category">Give management visibility</span>
+            <span class="system-name">Sales Intelligence</span>
+          </span>
+          <i class="ti ti-plus system-toggle-icon"></i>
+        </button>
+        <div class="system-detail">
+          <p>Give management a simple view of where the sales process is working — and where opportunities are being lost.</p>
+          <p class="system-capabilities">Response time &middot; Untouched leads &middot; Appointments booked &middot; Test drives completed &middot; Conversion &middot; Lead source performance &middot; Salesperson follow-up</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SECTION 5: THE TIMESTAMP STORY (EXAMPLE) ================= -->
+<section class="timeline-section" style="padding-top:0;">
   <div class="container">
     <div class="timeline-row">
       <div class="timeline-time">
@@ -548,24 +766,34 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
     </div>
     <div class="timeline-row">
       <div class="timeline-time">
-        <span class="timeline-time-value">08:47</span>
-        <span>Monday</span>
+        <span class="timeline-time-value">20:16</span>
+        <span>Saturday</span>
       </div>
-      <div class="timeline-event timeline-event--muted">Your sales rep opens his inbox.</div>
+      <div class="timeline-event timeline-event--accent">Metryx responds, qualifies the buyer and offers a test drive.</div>
     </div>
     <div class="timeline-row">
       <div class="timeline-time">
         <span class="timeline-dot"></span>
       </div>
-      <div class="timeline-event timeline-event--accent">Competitor already closed the deal.</div>
+      <div class="timeline-event">By Monday morning, the appointment is already in the calendar.</div>
     </div>
-    <p class="timeline-footer">Sound familiar?</p>
+    <p class="timeline-footer">No lost weekend. No lost deal.</p>
   </div>
 </section>
 
-<!-- ================= SECTION 4: WHATSAPP PROOF VISUAL ================= -->
+<!-- ================= SECTION 6: WHATSAPP PROOF VISUAL ================= -->
 <section class="section" style="padding-top:0;">
   <div class="container">
+    <h2 class="proof-heading">This is one part of the system.</h2>
+    <p class="proof-honest" style="margin-bottom:32px;">A new enquiry comes in after hours. The AI responds, qualifies the buyer and offers available test-drive slots — while the salesperson is away.</p>
+
+    <div class="flow-row" style="margin-bottom:32px;">
+      <span class="flow-step">Respond</span><span class="flow-arrow">&rarr;</span>
+      <span class="flow-step">Qualify</span><span class="flow-arrow">&rarr;</span>
+      <span class="flow-step">Book</span><span class="flow-arrow">&rarr;</span>
+      <span class="flow-step">Notify</span>
+    </div>
+
     <p class="wa-intro">This conversation happened automatically. Your sales rep was asleep.</p>
 
     <div class="phone-frame">
@@ -619,42 +847,101 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- ================= SECTION 5: THREE PROOF POINTS (ASYMMETRIC) ================= -->
+<!-- ================= SECTION 7: MORE EXAMPLES ================= -->
 <section class="section" style="padding-top:0;">
   <div class="container">
-    <div class="proof-asym">
-      <div class="proof-main">
-        <div class="proof-keyword">2 minutes</div>
-        <p class="proof-body">Every lead from AutoTrader, Cars.co.za, or your website gets a professional WhatsApp reply before your competitor picks up the phone.</p>
-      </div>
-      <div class="proof-side">
-        <div class="proof-point">
-          <div class="proof-label">Qualifies the buyer</div>
-          <p>Confirms budget, finance vs cash, preferred vehicle — then drops the test drive into your sales rep's calendar.</p>
+    <h2 class="proof-heading">And the conversation doesn't stop there.</h2>
+
+    <div class="stack-list">
+      <div class="proof-point">
+        <div class="proof-label example-label">New lead</div>
+        <div class="flow-row">
+          <span class="flow-step">Instant response</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Qualification</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Appointment</span>
         </div>
-        <div class="proof-point">
-          <div class="proof-label">Works while you sleep</div>
-          <p>Saturday nights. Sundays. Public holidays. Every enquiry gets the same professional response.</p>
+      </div>
+      <div class="proof-point">
+        <div class="proof-label example-label">Old lead</div>
+        <div class="flow-row">
+          <span class="flow-step">CRM</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Personalised reactivation</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Conversation</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Appointment</span>
+        </div>
+      </div>
+      <div class="proof-point">
+        <div class="proof-label example-label">Missed call</div>
+        <div class="flow-row">
+          <span class="flow-step">Missed call</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Instant WhatsApp</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Enquiry</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Appointment</span>
+        </div>
+      </div>
+      <div class="proof-point">
+        <div class="proof-label example-label">Test drive</div>
+        <div class="flow-row">
+          <span class="flow-step">Booking</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Confirmation</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Reminder</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Salesperson notification</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Follow-up</span>
+        </div>
+      </div>
+      <div class="proof-point">
+        <div class="proof-label example-label">After the sale</div>
+        <div class="flow-row">
+          <span class="flow-step">Customer</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Follow-up</span><span class="flow-arrow">&rarr;</span>
+          <span class="flow-step">Review request</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= SECTION 6: SOCIAL PROOF ================= -->
+<!-- ================= SECTION 8: ADVANCED AUTOMATIONS ================= -->
 <section class="section" style="padding-top:0;">
   <div class="container">
-    <h2 class="proof-heading">Working with dealerships across Johannesburg</h2>
-    <hr class="rule-center">
-    <p class="proof-honest">Metryx is currently in its founding cohort - a small group of Joburg dealerships getting early access before the full launch.</p>
+    <h2 class="section-title section-title--sm">Need something more specific?</h2>
+    <p class="hero-sub" style="margin-bottom:36px;">The same automation infrastructure can be extended to other dealership workflows.</p>
+
+    <div class="advanced-grid">
+      <div class="advanced-item">
+        <h4>Finance Pre-Qualification</h4>
+        <p>Collect and organize the information your finance team needs before a salesperson gets involved.</p>
+      </div>
+      <div class="advanced-item">
+        <h4>Trade-In Pipeline</h4>
+        <p>Collect VIN, mileage, photos and missing information, then keep the customer updated as the valuation progresses.</p>
+      </div>
+      <div class="advanced-item">
+        <h4>AI Deal Concierge</h4>
+        <p>An AI assistant that can handle deeper vehicle, stock, finance, trade-in and appointment conversations.</p>
+      </div>
+      <div class="advanced-item">
+        <h4>Lost Deal Analysis</h4>
+        <p>When a deal is marked lost, automatically capture why and surface patterns management can act on.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ================= SECTION 7: BOOKING ================= -->
+<!-- ================= SECTION 9: SOCIAL PROOF ================= -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <h2 class="proof-heading">Built for the way dealerships actually work.</h2>
+    <hr class="rule-center">
+    <p class="proof-honest">Metryx is currently working with its founding cohort of Johannesburg dealerships, building practical AI and automation systems around the tools and processes they already use.</p>
+  </div>
+</section>
+
+<!-- ================= SECTION 10: BOOKING ================= -->
 <section class="section" id="booking">
   <div class="container">
-    <h2 class="booking-heading">Watch it handle a Saturday night AutoTrader lead. In real time.</h2>
-    <p class="booking-sub">30 minutes with Ethan. He'll run a live demo using your dealership's actual lead scenario - you'll see the full WhatsApp conversation play out in real time.</p>
+    <h2 class="booking-heading">Let's find the biggest automation opportunity in your dealership.</h2>
+    <p class="booking-sub">30 minutes with Ethan. We'll look at where leads, sales opportunities and staff time are currently being lost — then identify which process is worth automating first.</p>
 
     <div class="booking-widget" id="bookingWidget">
 
@@ -716,8 +1003,28 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
             </select>
           </div>
           <div class="form-group">
-            <label for="fieldPain">Biggest lead challenge right now</label>
-            <textarea id="fieldPain" name="pain_point" required></textarea>
+            <label for="fieldSalespeople">How many salespeople are on your team?</label>
+            <select id="fieldSalespeople" name="salespeople" required>
+              <option value="" disabled selected>Select an option</option>
+              <option value="1–3">1–3</option>
+              <option value="4–7">4–7</option>
+              <option value="8–15">8–15</option>
+              <option value="16+">16+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Where would automation help most?</label>
+            <div class="checkbox-group">
+              <label class="checkbox-item"><input type="checkbox" name="automation_interests" value="Responding to new leads">Responding to new leads</label>
+              <label class="checkbox-item"><input type="checkbox" name="automation_interests" value="Following up with old leads">Following up with old leads</label>
+              <label class="checkbox-item"><input type="checkbox" name="automation_interests" value="Recovering missed calls">Recovering missed calls</label>
+              <label class="checkbox-item"><input type="checkbox" name="automation_interests" value="Booking &amp; confirming test drives">Booking &amp; confirming test drives</label>
+              <label class="checkbox-item"><input type="checkbox" name="automation_interests" value="Finance pre-qualification">Finance pre-qualification</label>
+              <label class="checkbox-item"><input type="checkbox" name="automation_interests" value="Trade-in enquiries">Trade-in enquiries</label>
+              <label class="checkbox-item"><input type="checkbox" name="automation_interests" value="Reviews &amp; post-sale follow-up">Reviews &amp; post-sale follow-up</label>
+              <label class="checkbox-item"><input type="checkbox" name="automation_interests" value="Sales reporting / management visibility">Sales reporting / management visibility</label>
+              <label class="checkbox-item"><input type="checkbox" name="automation_interests" value="I'm not sure — help me identify the opportunity">I'm not sure — help me identify the opportunity</label>
+            </div>
           </div>
 
           <div class="form-error" id="formError" hidden></div>
@@ -933,6 +1240,17 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
     e.preventDefault();
     formErrorEl.hidden = true;
 
+    const interests = Array.prototype.map.call(
+      bookingForm.querySelectorAll('input[name="automation_interests"]:checked'),
+      function(cb){ return cb.value; }
+    );
+
+    if (interests.length === 0){
+      formErrorEl.textContent = "Please select at least one option for where automation would help.";
+      formErrorEl.hidden = false;
+      return;
+    }
+
     const data = new FormData(bookingForm);
     const payload = {
       name: (data.get("name") || "").trim(),
@@ -940,8 +1258,12 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
       whatsapp: (data.get("whatsapp") || "").trim(),
       business: (data.get("business") || "").trim(),
       industry: "Car Dealership",
-      pain_point: (data.get("pain_point") || "").trim(),
       leads_per_week: (data.get("leads_per_week") || "").trim(),
+      salespeople: (data.get("salespeople") || "").trim(),
+      automation_interests: interests,
+      // kept for backward compatibility with the existing n8n email/calendar templates,
+      // which read pain_point — this is derived from the new checkbox selections
+      pain_point: interests.join(", "),
       slot_date: state.slot.date,
       slot_time: state.time,
       slot_datetime_iso: toISODateTime(state.slot.date, state.time),
@@ -994,6 +1316,19 @@ src="https://www.facebook.com/tr?id=1553967216220019&ev=PageView&noscript=1"
   }
 
   loadAvailability();
+
+  /* ============================================================
+     FIVE SYSTEMS ACCORDION
+     ============================================================ */
+
+  Array.prototype.forEach.call(document.querySelectorAll(".system-card"), function(card){
+    const toggle = card.querySelector(".system-toggle");
+    toggle.addEventListener("click", function(){
+      const isOpen = card.classList.contains("open");
+      card.classList.toggle("open", !isOpen);
+      toggle.setAttribute("aria-expanded", String(!isOpen));
+    });
+  });
 })();
 </script>
 
